@@ -1,0 +1,1 @@
+ALTER DATABASE "name" OWNER TO "new_owner";
