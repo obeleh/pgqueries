@@ -2,3 +2,5 @@
 
 -- CREATE USER is equivalent to CREATE ROLE except that CREATE USER assumes LOGIN by default, while CREATE ROLE does not.
 CREATE ROLE rolename LOGIN SUPERUSER PASSWORD 'passwordstring';
+
+-- CREATE USER username WITH LOGIN CREATEDB PASSWORD 'passwordstring';
