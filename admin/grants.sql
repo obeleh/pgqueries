@@ -9,8 +9,11 @@ GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO mygrp; -- don't forget those
 
 --To set default privileges for future objects, run for every role that creates objects in this schema:
 
-ALTER DEFAULT PRIVILEGES FOR ROLE myusr IN SCHEMA public
+ALTER DEFAULT PRIVILEGES FOR ROLE mygrp IN SCHEMA public
 GRANT ALL ON TABLES TO mygrp;
 
-ALTER DEFAULT PRIVILEGES FOR ROLE myusr IN SCHEMA public
+ALTER DEFAULT PRIVILEGES FOR ROLE mygrp IN SCHEMA public
 GRANT ALL ON SEQUENCES TO mygrp;
+
+
+-- REASSIGN OWNED BY smart_prod TO kabisa
