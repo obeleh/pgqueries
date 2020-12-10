@@ -28,7 +28,11 @@ SELECT
     i.idx_scan AS idx_scans,
     i.idx_tup_read AS tuples_read,
     i.idx_tup_fetch AS tuples_fetched,
-    100 * i.idx_scan/(i.idx_scan + ts.seq_scan) AS percent_index_use
+    CASE WHEN (i.idx_scan + ts.seq_scan) = 0 THEN
+        NULL
+    ELSE
+        100 * i.idx_scan/(i.idx_scan + ts.seq_scan)
+    END AS percent_index_use
 FROM pg_tables t
 LEFT OUTER JOIN pg_class c ON t.tablename=c.relname
 LEFT OUTER JOIN
@@ -40,4 +44,5 @@ LEFT OUTER JOIN
     ON t.tablename = i.ctablename
 LEFT JOIN pg_stat_all_tables ts ON t.tablename = ts.relname
 WHERE t.schemaname NOT IN ('pg_catalog', 'information_schema')
-ORDER BY seq_scan * c.reltuples DESC, 1 ASC,2 ASC;
+ORDER BY seq_scan * c.reltuples DESC, 1 ASC,2 ASC
+LIMIT 10;
